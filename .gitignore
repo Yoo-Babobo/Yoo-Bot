@@ -1,0 +1,14 @@
+# Dependency directory
+node_modules/
+
+# Electron-Builder
+electron-builder.yml
+
+# Dist directory
+dist/
+
+# VS Code
+.vscode/
+
+# App Data
+app-data

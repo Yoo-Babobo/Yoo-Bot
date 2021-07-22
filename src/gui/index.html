@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="preload" href="assets/fonts/Roboto.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      let $ = require("jquery");
+      let jQuery = $;
+      let fs = require("fs");
+      let bot = require("../bot/bot.js");
+    </script>
+    <title>Yoo-Bot</title>
+  </head>
+  <body>
+    <div class="main">
+      <div id="top-bar">
+        <div>
+          <img src="assets/img/logo.png" alt="The Discord Logo" />
+        </div>
+        <div>
+          <button class="topbar-btn" id="minimize-btn" aria-label="Minimize" data-microtip-position="bottom-left" role="tooltip">—</button>
+          <button class="topbar-btn" id="close-btn" aria-label="Close" data-microtip-position="bottom-left" role="tooltip">✕</button>
+        </div>
+      </div>
+      <div class="root">
+        <h1>Yoo-Bot</h1>
+        <p>An app to run your Discord bot.</p>
+        <table>
+          <tbody>
+            <tr>
+              <td><button class="big-btn" id="start" aria-label="Start The Bot" data-microtip-position="top" role="tooltip">Start</button></td>
+              <td><button class="big-btn" id="stop" aria-label="Stop The Bot" data-microtip-position="top" role="tooltip">Stop</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+            <tr>
+              <td><input type="text" id="name" placeholder="Bot Name" /></td>
+              <td><input type="text" id="prefix" placeholder="Bot Prefix" /></td>
+              <td><input type="password" id="token" placeholder="Bot Token" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <input type="url" id="invite" placeholder="Bot Invite Link" style="width: 95%;" />
+      </div>
+      <div id="notification">
+        <br>
+        <p id="notification-title"></p>
+        <p id="notification-message"></p>
+        <button id="notification-button1">Dismiss</button>
+        <button class="hidden" id="notification-button2"></button>
+      </div>
+      <p id="version">—</p>
+    </div>
+    <link rel="stylesheet" href="../../node_modules/microtip/microtip.min.css" />
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/menu.js"></script>
+    <script src="scripts/home.js"></script>
+  </body>
+</html>
