@@ -1,2 +1,2 @@
 # Yoo-Bot
-An app to run your Discord bot.
+A framework for discord.js bots.
