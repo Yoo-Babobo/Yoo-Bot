@@ -220,10 +220,10 @@ input {
 
 .big-btn:hover {
     box-shadow: none;
-    transform: scale(.95) rotate(-10deg);
+    transform: scale(.95) rotate(-6deg);
 }
 
 .big-btn:active {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
-    transform: scale(1.02) rotate(-10deg);
+    transform: scale(1.02) rotate(-6deg);
 }

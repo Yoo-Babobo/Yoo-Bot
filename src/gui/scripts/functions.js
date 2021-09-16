@@ -1,39 +1,48 @@
 const { ipcRenderer } = require("electron");
 
 $(() => {
+    var id = $("#id").val();
+
     $("input, button, a").prop("tabIndex", -1);
     $("button").on("focus", () => $("button").trigger("blur"));
 
-    fs.readFile("app-data/name.dat", "utf8" , (err, data) => {
+    fs.readFile("app-data/bots/discord/" + id + "/name.dat", "utf8" , (err, data) => {
         if (err) return;
         $("#name").val(data.toString());
     });
 
-    fs.readFile("app-data/prefix.dat", "utf8" , (err, data) => {
+    fs.readFile("app-data/bots/discord/" + id + "/prefixes.dat", "utf8" , (err, data) => {
         if (err) return;
-        $("#prefix").val(data.toString());
+        $("#prefixes").val(data.toString());
     });
 
-    fs.readFile("app-data/invite.dat", "utf8" , (err, data) => {
+    fs.readFile("app-data/bots/discord/" + id + "/owners.dat", "utf8" , (err, data) => {
+        if (err) return;
+        $("#owners").val(data.toString());
+    });
+
+    fs.readFile("app-data/bots/discord/" + id + "/invite.dat", "utf8" , (err, data) => {
         if (err) return;
         $("#invite").val(data.toString());
     });
 
-    fs.readFile("app-data/token.dat", "utf8" , (err, data) => {
+    fs.readFile("app-data/bots/discord/" + id + "/token.dat", "utf8" , (err, data) => {
         if (err) return;
         $("#token").val(data.toString());
     });
 
     setInterval(() => {
         create_if_not_exist_dir("./app-data");
-        create_if_not_exist_dir("./app-data/commands");
-        create_if_not_exist_dir("./app-data/events");
-        create_if_not_exist("./app-data/name.dat");
-        create_if_not_exist("./app-data/prefix.dat");
-        create_if_not_exist("./app-data/invite.dat");
-        create_if_not_exist("./app-data/token.dat");
+        create_if_not_exist_dir("./app-data/bots/discord/" + id + "/commands");
+        create_if_not_exist_dir("./app-data/bots/discord/" + id + "/slash");
+        create_if_not_exist_dir("./app-data/bots/discord/" + id + "/events");
+        create_if_not_exist("./app-data/bots/discord/" + id + "/name.dat");
+        create_if_not_exist("./app-data/bots/discord/" + id + "/prefixes.dat");
+        create_if_not_exist("./app-data/bots/discord/" + id + "/owners.dat");
+        create_if_not_exist("./app-data/bots/discord/" + id + "/invite.dat");
+        create_if_not_exist("./app-data/bots/discord/" + id + "/token.dat");
         create_if_not_exist("./app-data/functions.js", `module.exports = {
-    message_events: (message, client) => {
+    message_events: (message, client, meta) => {
         switch (message.content) {
             
         }
@@ -53,13 +62,29 @@ $(() => {
     "help_command_embed_color": "RANDOM",
     "help_command_enabled": true,
 
-    "ping_command": "Pong! :ping_pong:\nLatency is {{latency}}ms. API Latency is {{api_latency}}ms.",
+    "ping_command": "Pong! :ping_pong:\\nLatency is {{latency}}ms. API Latency is {{api_latency}}ms.",
     "ping_command_embed_color": "RANDOM",
     "ping_command_enabled": true,
 
     "invite_command": "Invite me to your server! [Click Here]({{link}})",
     "invite_command_embed_color": "RANDOM",
-    "invite_command_enabled": true
+    "invite_command_enabled": true,
+
+    "command_unknown": "Sorry, that command doesn't exist! Do \`{{prefix}}help\` for help.",
+    "command_unknown_embed_color": "RED",
+    "command_unknown_enabled": true,
+
+    "command_error": "An error occured while executing that command!\`\`\`{{error}}\`\`\`",
+    "command_error_embed_color": "RED",
+    "command_error_enabled": true,
+
+    "command_guild_only": "This command can only be used in servers!",
+    "command_guild_only_embed_color": "RED",
+    "command_guild_only_enabled": true,
+
+    "command_incorrect_usage": "Hm. That's not how you use that command.\\nCorrect usage: \`{{usage}}\`",
+    "command_incorrect_usage_embed_color": "RED",
+    "command_incorrect_usage_enabled": true
 }`);
     }, 20);
 });

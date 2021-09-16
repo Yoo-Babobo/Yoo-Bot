@@ -1,6 +1,7 @@
-const { app, ipcMain, BrowserWindow } = require("electron");
+const { app, ipcMain, shell, BrowserWindow } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
+const { windowsStore } = require("process");
 
 const size = 600;
 var mainWindow;
@@ -40,7 +41,13 @@ autoUpdater.on("update-available", () => mainWindow.webContents.send("update_ava
 autoUpdater.on("update-downloaded", () => mainWindow.webContents.send("update_downloaded"));
 
 ipcMain.on("restart", () => { autoUpdater.quitAndInstall(); });
+ipcMain.on("reload", () => { mainWindow.loadFile(path.join(__dirname, "src/gui/index.html")); });
 ipcMain.on("hide", () => { mainWindow.minimize(); });
 ipcMain.on("close", () => { app.quit(); });
+
+ipcMain.on("config", () => { shell.openPath(path.join(__dirname, "app-data/config.json")); });
+ipcMain.on("functions", () => { shell.openPath(path.join(__dirname, "app-data/functions.js")); });
+ipcMain.on("commands", () => { shell.openPath(path.join(__dirname, "app-data/commands")); });
+ipcMain.on("events", () => { shell.openPath(path.join(__dirname, "app-data/events")); });
 
 ipcMain.on("app-version", event => event.sender.send("app-version", { version: app.getVersion() }));
